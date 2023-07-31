@@ -5,8 +5,4 @@
   :license "Apache 2.0"
   :pathname "hack"
   :components ((:file "package")
-               #+sbcl (:file "sb-loop")
-               #+(or cmucl ccl) (:file "ansi-loop")
-               #+allegro (:file "acl")
-               #+clasp (:file "clasp")
-               #+abcl (:file "abcl")))
+               #+(or sbcl cmucl ccl allegro clasp abcl) (:file "ansi-loop")))
