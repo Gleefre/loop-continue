@@ -67,10 +67,10 @@
   (define-symbol-macro *loop-before-loop* (sb-loop::before-loop sb-loop::*loop*)))
 
 (defun loop-continue ()
-  (unless (member :continue *loop-after-body*)
-    (setf *loop-after-body* (append *loop-after-body* (list :continue)))
+  (unless (member 'continue *loop-after-body*)
+    (setf *loop-after-body* (append *loop-after-body* (list 'continue)))
     (setf *loop-before-loop* (append *loop-before-loop* (list (gensym)))))
-  (loop-emit-body `(go :continue)))
+  (loop-emit-body '(go continue)))
 
 (defparameter *enabled* NIL)
 
