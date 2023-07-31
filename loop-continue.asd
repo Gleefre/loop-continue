@@ -7,4 +7,4 @@
   :author "Grolter <varedif.a.s@gmail.com>"
   :license "Apache 2.0"
   :pathname "src"
-  :components (#+(or sbcl cmucl ccl allegro clasp abcl ecl) (:file "ansi-loop")))
+  :components (#+(or sbcl cmucl ccl allegro clasp abcl ecl) (:file "mit-loop")))
