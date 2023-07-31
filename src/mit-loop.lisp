@@ -15,8 +15,8 @@
                 #-sbcl #:*loop-before-loop*
                 #-sbcl #:loop-universe-keywords
                 #+sbcl #:keywords)
-  (:export #:enable!
-           #:disable!))
+  (:export #:enable
+           #:disable))
 
 (in-package #:loop-tag-go)
 
@@ -72,18 +72,18 @@
     (setf *loop-before-loop* (append *loop-before-loop* (list (gensym)))))
   (loop-emit-body `(go :continue)))
 
-(defparameter *hacked!* NIL)
+(defparameter *enabled* NIL)
 
-(defun enable! ()
-  (unless *hacked!*
+(defun enable ()
+  (unless *enabled*
     (setf (gethash "TAG" (uni)) '(loop-tag)
           (gethash "GO" (uni)) '(loop-go)
           (gethash "CONTINUE" (uni)) '(loop-continue)
-          *hacked!* T)))
+          *enabled* T)))
 
-(defun disable! ()
-  (when *hacked!*
+(defun disable ()
+  (when *enabled*
     (remhash "TAG" (uni))
     (remhash "GO" (uni))
     (remhash "CONTINUE" (uni))
-    (setf *hacked!* NIL)))
+    (setf *enabled* NIL)))
