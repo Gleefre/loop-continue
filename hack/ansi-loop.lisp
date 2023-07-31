@@ -11,6 +11,8 @@
                 #-ecl #:loop-emit-body
                 #-ecl #:loop-error
                 #:*loop-ansi-universe*
+                #-sbcl #:*loop-after-body*
+                #-sbcl #:*loop-before-loop*
                 #-sbcl #:loop-universe-keywords
                 #+sbcl #:keywords)
   (:export #:enable!
@@ -59,16 +61,29 @@
         (loop-emit-body `(go ,tag))
         (loop-error "A go tag was expected, but ~S found." tag))))
 
+#+sbcl
+(eval-when (:load-toplevel :compile-toplevel :execute)
+  (define-symbol-macro *loop-after-body* (sb-loop::after-body sb-loop::*loop*))
+  (define-symbol-macro *loop-before-loop* (sb-loop::before-loop sb-loop::*loop*)))
+
+(defun loop-continue ()
+  (unless (member :continue *loop-after-body*)
+    (setf *loop-after-body* (append *loop-after-body* (list :continue)))
+    (setf *loop-before-loop* (append *loop-before-loop* (list (gensym)))))
+  (loop-emit-body `(go :continue)))
+
 (defparameter *hacked!* NIL)
 
 (defun enable! ()
   (unless *hacked!*
     (setf (gethash "TAG" (uni)) '(loop-tag)
           (gethash "GO" (uni)) '(loop-go)
+          (gethash "CONTINUE" (uni)) '(loop-continue)
           *hacked!* T)))
 
 (defun disable! ()
   (when *hacked!*
     (remhash "TAG" (uni))
     (remhash "GO" (uni))
+    (remhash "CONTINUE" (uni))
     (setf *hacked!* NIL)))
