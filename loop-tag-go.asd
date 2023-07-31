@@ -1,4 +1,4 @@
-(defsystem "loop-tag-go"
+(asdf:defsystem "loop-tag-go"
   :description "Hack that adds TAG/GO keywords to the LOOP macro."
   :version "0.0.1"
   :author "Grolter <varedif.a.s@gmail.com>"
