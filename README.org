@@ -21,14 +21,14 @@ This is an extension to the CL:LOOP macro that provides =CONTINUE=,
 
   To enable the extension use the ~enable~ function:
   #+BEGIN_SRC common-lisp
-  (loop-tag-go:enable)
+  (loop-continue:enable)
   ; => T
   ;; Now you can use CONTINUE, TAG and GO in your loops!
   #+END_SRC
 
   You can also disable the extension with ~disable~:
   #+BEGIN_SRC common-lisp
-  (loop-tag-go:disable)
+  (loop-continue:disable)
   ; => NIL
   ;; Now CONTINUE, TAG and GO don't work again.
   #+END_SRC
