@@ -5,8 +5,10 @@
 #+language: en
 #+options: toc:nil
 
-This is a hack that enables TAG/GO keywords in a LOOP macro (works on SBCL, CMUCL).
+This is a hack that enables TAG/GO keywords in a LOOP macro.
 
+* Supported implementations
+  SBCL, CMUCL, CCL, Allegro CL, CLASP, ABCL, ECL.
 * Installation
   Clone this repository to =~/quicklisp/local-projects= directory and
   load the system with ~ql:quickload~ or ~asdf:load-system~:
