@@ -1,0 +1,45 @@
+#+title: Loop TAG/GO keywords
+#+author: Gleefre
+#+email: varedif.a.s@gmail.com
+
+#+language: en
+#+options: toc:nil
+
+This is a hack that enables TAG/GO keywords in a LOOP macro (works on SBCL, CMUCL).
+
+* Installation
+  Clone this repository to =~/quicklisp/local-projects= directory and
+  load the system with ~ql:quickload~ or ~asdf:load-system~:
+  #+BEGIN_SRC common-lisp
+  (ql:quickload :loop-tag-go)  ; or (asdf:load-system :symbol-links)
+  #+END_SRC
+
+  To enable this hack use the ~enable!~ function:
+  #+BEGIN_SRC common-lisp
+  (loop-tag-go:enable!)
+  ; => T
+  ;; Now you can use TAG/GO in your loops!
+  #+END_SRC
+
+  You can also disable the hack with ~disable!~:
+  #+BEGIN_SRC common-lisp
+  (loop-tag-go:disable!)
+  ; => NIL
+  ;; Now TAG/GO don't work again.
+  #+END_SRC
+* Description
+  ~TAG~ / ~GO~ keywords in a loop add control over the implicit
+  ~TAGBODY~ of the ~LOOP~ macro.  You can create a tag with ~tag <go
+  tag>~ (~tag~ cannot be used inside conditional clauses), and you can
+  go to an exit marked by the ~tag~ with either the ~go <go-tag>~
+  keyword or with an ordinary ~(go <go-tag>)~ form.
+* Examples
+  ~continue~ analogue:
+  #+BEGIN_SRC common-lisp
+  (loop #:for i #:from 1 #:to 10
+        #:when (zerop (mod i 3))
+          #:go end
+        #:collect i
+        #:tag end)
+  ; => (1 2 4 5 7 8 10)
+  #+END_SRC
