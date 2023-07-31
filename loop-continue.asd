@@ -2,7 +2,7 @@
 (error "This Common Lisp implementation is not supported.")
 
 (asdf:defsystem "loop-continue"
-  :description "Hack that adds TAG/GO keywords to the LOOP macro."
+  :description "Extension to the CL:LOOP macro: CONTINUE, TAG, GO."
   :version "0.0.1"
   :author "Grolter <varedif.a.s@gmail.com>"
   :license "Apache 2.0"
