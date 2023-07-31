@@ -20,9 +20,9 @@
 
 (in-package #:loop-tag-go)
 
-(defmacro uni ()
-  #-sbcl '(loop-universe-keywords *loop-ansi-universe*)
-  #+sbcl '(slot-value *loop-ansi-universe* 'keywords))
+(defun universe-keywords ()
+  #-sbcl (loop-universe-keywords *loop-ansi-universe*)
+  #+sbcl (slot-value *loop-ansi-universe* 'keywords))
 
 ;; ECL "hides" some functions by declaring them (si::c-local)
 #+ecl
@@ -76,14 +76,14 @@
 
 (defun enable ()
   (unless *enabled*
-    (setf (gethash "TAG" (uni)) '(loop-tag)
-          (gethash "GO" (uni)) '(loop-go)
-          (gethash "CONTINUE" (uni)) '(loop-continue)
+    (setf (gethash "TAG" (universe-keywords)) '(loop-tag)
+          (gethash "GO" (universe-keywords)) '(loop-go)
+          (gethash "CONTINUE" (universe-keywords)) '(loop-continue)
           *enabled* T)))
 
 (defun disable ()
   (when *enabled*
-    (remhash "TAG" (uni))
-    (remhash "GO" (uni))
-    (remhash "CONTINUE" (uni))
+    (remhash "TAG" (universe-keywords))
+    (remhash "GO" (universe-keywords))
+    (remhash "CONTINUE" (universe-keywords))
     (setf *enabled* NIL)))
