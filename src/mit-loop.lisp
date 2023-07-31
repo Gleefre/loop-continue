@@ -1,4 +1,4 @@
-(defpackage #:loop-tag-go
+(defpackage #:loop-continue
   (:use #:cl)
   (:import-from #+sbcl #:sb-loop
                 #+(or cmucl ccl) #:ansi-loop
@@ -18,7 +18,7 @@
   (:export #:enable
            #:disable))
 
-(in-package #:loop-tag-go)
+(in-package #:loop-continue)
 
 (defun universe-keywords ()
   #-sbcl (loop-universe-keywords *loop-ansi-universe*)
