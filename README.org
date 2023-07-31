@@ -1,44 +1,44 @@
-#+title: Loop TAG/GO keywords
+#+title: Loop continue
 #+author: Gleefre
 #+email: varedif.a.s@gmail.com
 
 #+language: en
 #+options: toc:nil
 
-This is a hack that enables TAG/GO/CONTINUE keywords in a LOOP macro.
+This is an extension to the CL:LOOP macro that provides =CONTINUE=,
+=TAG= and =GO= keywords.
 
 * Supported implementations
   SBCL, CMUCL, CCL, Allegro CL, CLASP, ABCL, ECL.
 * Installation
-  Clone this repository to =~/quicklisp/local-projects= directory and
-  load the system with ~ql:quickload~ or ~asdf:load-system~:
+  This library is available in [[https://ultralisp.org/][ultralisp]].
+  Alternatively you can clone this repository to the =~/quicklisp/local-projects= directory.
+
+  Load the system with ~ql:quickload~ or ~asdf:load-system~
   #+BEGIN_SRC common-lisp
-  (ql:quickload :loop-tag-go)  ; or (asdf:load-system :symbol-links)
+  (ql:quickload :loop-continue)  ; or (asdf:load-system :loop-continue)
   #+END_SRC
 
-  To enable this hack use the ~enable!~ function:
+  To enable the extension use the ~enable~ function:
   #+BEGIN_SRC common-lisp
-  (loop-tag-go:enable!)
+  (loop-tag-go:enable)
   ; => T
-  ;; Now you can use TAG/GO in your loops!
+  ;; Now you can use CONTINUE, TAG and GO in your loops!
   #+END_SRC
 
-  You can also disable the hack with ~disable!~:
+  You can also disable the extension with ~disable~:
   #+BEGIN_SRC common-lisp
-  (loop-tag-go:disable!)
+  (loop-tag-go:disable)
   ; => NIL
-  ;; Now TAG/GO don't work again.
+  ;; Now CONTINUE, TAG and GO don't work again.
   #+END_SRC
 * Description
-  ~TAG~ / ~GO~ keywords in a loop add control over the implicit
-  ~TAGBODY~ of the ~LOOP~ macro.  You can create a tag with ~tag <go
-  tag>~ (~tag~ cannot be used inside conditional clauses), and you can
-  go to an exit marked by the ~tag~ with either the ~go <go-tag>~
-  keyword or with an ordinary ~(go <go-tag>)~ form.
+  =CONTINUE= allows you to skip the current loop iteration (similar to
+  ~continue~ in other languages).
 
-  You can also use the ~CONTINUE~ keyword to skip the current iteration.
-  (It automatically inserts a tag ~:CONTINUE~ in the end of the loop).
+  =TAG= and =GO= provide finer control similar to ~TAGBODY~.
 * Examples
+  =CONTINUE=:
   #+BEGIN_SRC common-lisp
   (loop #:for i #:from 1 #:to 6
         #:when (zerop (mod i 2))
@@ -47,7 +47,7 @@ This is a hack that enables TAG/GO/CONTINUE keywords in a LOOP macro.
   ; => (1 3 5)
   #+END_SRC
 
-  ~continue~ analogue but with a "protected" ~do~ clause:
+  For finer flow control you can use =TAG= and =GO=:
   #+BEGIN_SRC common-lisp
   (loop #:for i #:from 1 #:to 4
         #:when (zerop (mod i 2))
