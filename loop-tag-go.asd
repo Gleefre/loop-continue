@@ -1,3 +1,6 @@
+#-(or sbcl cmucl ccl allegro clasp abcl ecl)
+(error "This Common Lisp implementation is not supported.")
+
 (asdf:defsystem "loop-tag-go"
   :description "Hack that adds TAG/GO keywords to the LOOP macro."
   :version "0.0.1"
