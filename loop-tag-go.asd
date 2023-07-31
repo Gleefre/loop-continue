@@ -7,4 +7,6 @@
   :components ((:file "package")
                #+sbcl (:file "sb-loop")
                #+(or cmucl ccl) (:file "ansi-loop")
-               #+allegro (:file "acl")))
+               #+allegro (:file "acl")
+               #+clasp (:file "clasp")
+               #+abcl (:file "abcl")))
