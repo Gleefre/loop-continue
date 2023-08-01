@@ -10,11 +10,11 @@
 (asdf:defsystem "loop-continue/enable"
   :description "Enables CONTINUE, TAG and GO in CL:LOOP."
   :depends-on ("loop-continue")
-  :pathname "src"
+  :pathname "misc"
   :components ((:file "enable")))
 
 (asdf:defsystem "loop-continue/disable"
   :description "Disables CONTINUE, TAG and GO in CL:LOOP."
   :depends-on ("loop-continue")
-  :pathname "src"
+  :pathname "misc"
   :components ((:file "disable")))
