@@ -8,35 +8,13 @@
 This is an extension to the CL:LOOP macro that provides =CONTINUE=,
 =TAG= and =GO= keywords.
 
+=CONTINUE= allows you to skip the current loop iteration (similar to
+~continue~ in other languages).
+
+=TAG= and =GO= provide finer control similar to ~TAGBODY~.
+
 * Supported implementations
   SBCL, CMUCL, CCL, Allegro CL, CLASP, ABCL, ECL.
-* Installation
-  This library is available in [[https://ultralisp.org/][ultralisp]].
-  Alternatively you can clone this repository to the =~/quicklisp/local-projects= directory.
-
-  Load the system with ~ql:quickload~ or ~asdf:load-system~
-  #+BEGIN_SRC common-lisp
-  (ql:quickload :loop-continue)  ; or (asdf:load-system :loop-continue)
-  #+END_SRC
-
-  To enable the extension use the ~enable~ function:
-  #+BEGIN_SRC common-lisp
-  (loop-continue:enable)
-  ; => T
-  ;; Now you can use CONTINUE, TAG and GO in your loops!
-  #+END_SRC
-
-  You can also disable the extension with ~disable~:
-  #+BEGIN_SRC common-lisp
-  (loop-continue:disable)
-  ; => NIL
-  ;; Now CONTINUE, TAG and GO don't work again.
-  #+END_SRC
-* Description
-  =CONTINUE= allows you to skip the current loop iteration (similar to
-  ~continue~ in other languages).
-
-  =TAG= and =GO= provide finer control similar to ~TAGBODY~.
 * Examples
   =CONTINUE=:
   #+BEGIN_SRC common-lisp
@@ -61,3 +39,43 @@ This is an extension to the CL:LOOP macro that provides =CONTINUE=,
   ; >> Logging: 4
   ; => (1 3)
   #+END_SRC
+* Installation
+  This library is available in [[https://ultralisp.org/][ultralisp]].
+  Alternatively you can clone this repository to the =~/quicklisp/local-projects= directory.
+
+  Load the system with ~ql:quickload~ or ~asdf:load-system~
+  #+BEGIN_SRC common-lisp
+  (ql:quickload :loop-continue)  ; or (asdf:load-system :loop-continue)
+  #+END_SRC
+
+  To enable the extension use the ~enable~ function:
+  #+BEGIN_SRC common-lisp
+  (loop-continue:enable)
+  ; => T
+  ;; Now you can use CONTINUE, TAG and GO in your loops!
+  #+END_SRC
+
+  You can also disable the extension with ~disable~:
+  #+BEGIN_SRC common-lisp
+  (loop-continue:disable)
+  ; => NIL
+  ;; Now CONTINUE, TAG and GO don't work again.
+  #+END_SRC
+* Bugs & Contributions
+  Feel free to report bugs or make suggestions by filing an issue on github.
+
+  Feel free to submit pull requests on github as well.
+* License
+  Copyright 2023 Gleefre
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
